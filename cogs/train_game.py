@@ -48,7 +48,7 @@ class TrainGameCog(commands.Cog):
     async def track_game(self, interaction, game_id: int):
         result = GD.get_game_data(game_id)
         if result is not None and GD.save_game_data(self.database, result):
-            await interaction.response.send_message("Successfully tacked game.")
+            await interaction.response.send_message("Successfully tracked game.")
         else:
             await interaction.response.send_message('Failed to track game. Please make sure provided ID is correct.', ephemeral = True)
 
@@ -72,7 +72,7 @@ class TrainGameCog(commands.Cog):
         if len(tracked_games) > 0: 
             await interaction.response.send_message(embed = _get_current_games(tracked_games))
         else:
-            await interaction.response.send_message('Failed to unsync user.', ephemeral = True)
+            await interaction.response.send_message('Unable to get games, or no games are tracked.', ephemeral = True)
 
     @tasks.loop(minutes=1)
     async def update_game_states(self):
