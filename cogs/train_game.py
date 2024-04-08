@@ -61,7 +61,7 @@ class TrainGameCog(commands.Cog):
 
     @app_commands.command(name = 'unsync_player', description = 'Removes player from the database. Used in auto updates')
     async def unsync_player(self, interaction, player_id: int):
-        if PL.delete_player(player_id): 
+        if PL.delete_player(self.database, player_id): 
             await interaction.response.send_message("Successfully unsynced user.")
         else:
             await interaction.response.send_message('Failed to unsync user.', ephemeral = True)
@@ -71,8 +71,10 @@ class TrainGameCog(commands.Cog):
         tracked_games = GD.get_tracked_games(self.database)
         if len(tracked_games) > 0: 
             await interaction.response.send_message(embed = _get_current_games(tracked_games))
+        elif tracked_games is None: 
+            await interaction.response.send_message('Unable to get tracked games.', ephemeral = True)
         else:
-            await interaction.response.send_message('Unable to get games, or no games are tracked.', ephemeral = True)
+            await interaction.response.send_message('I am not currently tracking any games.')
 
     @tasks.loop(minutes=1)
     async def update_game_states(self):

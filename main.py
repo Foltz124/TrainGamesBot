@@ -1,10 +1,18 @@
-import argparse
-import bot 
+import asyncio
 import settings
 
-arg_parser = argparse.ArgumentParser()
-arg_parser.add_argument('-d', '--debug', action='store_true',
-        help='Run the application in debug mode.')
+from bot import DiscordBot
 
 if __name__ == '__main__':
-    bot.run(arg_parser.parse_args().debug, settings.TOKEN, settings.GUILD_ID)
+    async def main():
+        bot = DiscordBot(settings.GUILD_ID, settings.LOG_LEVEL)
+
+        @bot.event
+        async def on_ready():
+            self.logger('Bot online')
+
+        await bot.load_cogs([ 'error', 'utilities' ])
+        await bot.start(settings.TOKEN)
+
+asyncio.run(main())
+
