@@ -1,4 +1,4 @@
-PRAGMA foreign_keys=OFF;
+PRAGMA foreign_keys=ON;
 
 CREATE TABLE IF NOT EXISTS "player"(
     id INT PRIMARY KEY NOT NULL,

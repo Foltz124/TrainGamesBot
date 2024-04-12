@@ -10,7 +10,7 @@ class UtilitiesCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Utilities cog loaded')
+        self.bot.info('Utilities cog loaded')
 
     @commands.command(hidden = True)
     @commands.has_permissions(administrator = True)

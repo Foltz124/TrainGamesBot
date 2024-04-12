@@ -14,7 +14,7 @@ class ExceptionHandlingCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        print('Exception handling cog loaded')
+        self.bot.info('Exception handling cog loaded')
 
     async def __dispatch_to_app_command_handler(self, interaction, error):
         self.bot.dispatch('app_command_error', interaction, error)
@@ -24,7 +24,7 @@ class ExceptionHandlingCog(commands.Cog):
         message = "Unable to process request. Please alert the bot owner."
         if isinstance(error, commands.MissingRequiredArgument):
             message = "You are missing a required argument, please try again."
-        print(error)
+        self.bot.error(error)
         await interaction.response.send_message(message, ephemeral = True)
 
 async def setup(bot):
