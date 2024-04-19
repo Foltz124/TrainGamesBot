@@ -17,19 +17,19 @@ class DiscordBot(commands.Bot):
         self.logger.addHandler(handler)
         self.logger.setLevel(log_level)
 
-    def debug(message: str):
+    def debug(self, message: str):
         self.logger.debug(message)
 
-    def info(message: str):
+    def info(self, message: str):
         self.logger.info(message)
 
-    def warning(message: str):
+    def warning(self, message: str):
         self.logger.warning(message)
         
-    def error(message: str):
+    def error(self, message: str):
         self.logger.error(message)
 
-    def critical(message: str):
+    def critical(self, message: str):
         self.logger.critical(message)
 
     async def load_cogs(self, cogs):
